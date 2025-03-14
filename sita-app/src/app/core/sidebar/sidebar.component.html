@@ -1,0 +1,28 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" [opened]="isOpen" class="sidenav">
+    <mat-nav-list>
+      @for (item of navItems; track item.name) {
+        @if (item.subItems?.length) {
+          <div class="nav-section">
+            <div class="nav-section-header">
+              <button mat-button [class.active]="activeItem === item.route" (click)="close(item)">
+                <span>{{ item.name }}</span>
+              </button>
+            </div>
+            @for (subItem of item.subItems; track subItem.name) {
+              <a mat-list-item [routerLink]="subItem.route" 
+                 [class.active]="activeItem === subItem.route">
+                <span class="subitem-text">{{ subItem.name }}</span>
+              </a>
+            }
+          </div>
+        } @else {
+          <a mat-list-item [routerLink]="item.route" 
+             [class.active]="activeItem === item.route">
+            <span>{{ item.name }}</span>
+          </a>
+        }
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>

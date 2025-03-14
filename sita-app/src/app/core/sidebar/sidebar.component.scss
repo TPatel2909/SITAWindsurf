@@ -1,0 +1,41 @@
+.sidenav-container {
+  height: calc(100vh - 64px);
+  background: transparent;
+}
+
+.sidenav {
+  width: 250px;
+  background-color: white;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.nav-section {
+  margin: 8px 0;
+
+  .nav-section-header {
+    padding: 16px;
+    font-weight: 500;
+    color: #1c5ba3;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+.mat-mdc-list-item {
+  &.active {
+    background-color: rgba(28, 91, 163, 0.1);
+    color: #1c5ba3;
+  }
+
+  .subitem-text {
+    padding-left: 16px;
+  }
+}
+
+:host ::ng-deep {
+  .mat-mdc-list-item {
+    &:hover {
+      background-color: rgba(28, 91, 163, 0.05);
+    }
+  }
+}

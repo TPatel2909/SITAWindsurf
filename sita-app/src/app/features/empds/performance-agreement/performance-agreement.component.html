@@ -1,0 +1,313 @@
+<div class="performance-agreement">
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>ANNEXURE A</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <h2 class="form-title">PERFORMANCE AGREEMENT PROFORMA</h2>
+
+      <div class="agreement-section">
+        <form [formGroup]="agreementForm" (ngSubmit)="onSubmit()">
+          <p>Following completion of this form, a copy must be forwarded to the Section:</p>
+          <p>Human Resources Management (applicable component/unit)</p>
+
+          <p class="parties">
+            <strong>ENTERED INTO BY AND BETWEEN:</strong><br>
+            The Department of (ABC) herein represented by
+          </p>
+
+          <div class="form-row" formGroupName="employerDetails">
+            <mat-form-field appearance="outline" class="full-width">
+              <input matInput placeholder="(full name)" formControlName="fullName">
+              <mat-error *ngIf="agreementForm.get('employerDetails.fullName')?.hasError('required') && agreementForm.get('employerDetails.fullName')?.touched">
+                Full name is required
+              </mat-error>
+            </mat-form-field>
+            in her/his capacity as
+            <mat-form-field appearance="outline" class="full-width">
+              <input matInput placeholder="(position)" formControlName="position">
+              <mat-error *ngIf="agreementForm.get('employerDetails.position')?.hasError('required') && agreementForm.get('employerDetails.position')?.touched">
+                Position is required
+              </mat-error>
+            </mat-form-field>
+            of the Department of (ABC)
+          </div>
+
+          <p>(herein referred to as the Employer)</p>
+
+          <p>and</p>
+
+          <div class="form-row" formGroupName="employeeDetails">
+            <mat-form-field appearance="outline" class="full-width">
+              <input matInput placeholder="(full name)" formControlName="fullName">
+              <mat-error *ngIf="agreementForm.get('employeeDetails.fullName')?.hasError('required') && agreementForm.get('employeeDetails.fullName')?.touched">
+                Full name is required
+              </mat-error>
+            </mat-form-field>
+            as the
+            <mat-form-field appearance="outline" class="full-width">
+              <input matInput placeholder="(position)" formControlName="position">
+              <mat-error *ngIf="agreementForm.get('employeeDetails.position')?.hasError('required') && agreementForm.get('employeeDetails.position')?.touched">
+                Position is required
+              </mat-error>
+            </mat-form-field>
+            of the Department of Public Service and Administration (herein referred to as the Employee)
+          </div>
+
+          <h3>WHEREBY IT IS AGREED AS FOLLOWS:</h3>
+
+          <section>
+            <h4>1. PURPOSE</h4>
+            <div class="numbered-section">
+              <p>1.1 The purpose of entering into this agreement is to communicate to the Employee the performance expectations of the Employer.</p>
+              <p>1.2 The performance agreement and accompanying work plan shall be used as the basis for assessing the suitability of the Employee for permanent employment (if on probation), and to assess whether the Employee has met the performance expectations applicable to her/his job. For employees who are already permanently employed, performance agreements, having been quality for appropriate standards, details are outlined in the Department's Performance Management Policy.</p>
+              <p>1.3 Should any non-agreement arise between the Employer and the Employee member in respect of matters regulated by this agreement, the process outlined in Section 13 of the PMDS shall be followed. If this process fails, the employee may follow the formal grievance rules of the Public Service (published in Government Notice R1012 of 25 July 2003).</p>
+            </div>
+          </section>
+
+          <section>
+            <h4>2. VALIDITY OF THE AGREEMENT</h4>
+            <div class="numbered-section" formGroupName="validityPeriod">
+              <p>2.1 The agreement will be valid for the period 
+                <mat-form-field appearance="outline">
+                  <input matInput [matDatepicker]="startPicker" formControlName="startDate" placeholder="Start Date">
+                  <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #startPicker></mat-datepicker>
+                  <mat-error *ngIf="agreementForm.get('validityPeriod.startDate')?.hasError('required') && agreementForm.get('validityPeriod.startDate')?.touched">
+                    Start date is required
+                  </mat-error>
+                </mat-form-field>
+                to
+                <mat-form-field appearance="outline">
+                  <input matInput [matDatepicker]="endPicker" formControlName="endDate" placeholder="End Date">
+                  <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #endPicker></mat-datepicker>
+                  <mat-error *ngIf="agreementForm.get('validityPeriod.endDate')?.hasError('required') && agreementForm.get('validityPeriod.endDate')?.touched">
+                    End date is required
+                  </mat-error>
+                </mat-form-field>
+              </p>
+              <p>2.2 The content of the agreement may be revised at any time during the above-mentioned period to determine the applicability of the matters agreed upon, especially when changes are significant.</p>
+              <p>2.3 If at any time during the validity of this agreement the work environment alters (whether as a result of government or management decisions or otherwise) to the extent that the contents of this agreement are no longer appropriate, the contents shall immediately be revised.</p>
+            </div>
+          </section>
+
+          <section>
+            <h4>3. JOB DETAILS</h4>
+            <div class="job-details" formGroupName="employeeDetails">
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Persal number</mat-label>
+                  <input matInput formControlName="persalNumber">
+                  <mat-error *ngIf="agreementForm.get('employeeDetails.persalNumber')?.hasError('required') && agreementForm.get('employeeDetails.persalNumber')?.touched">
+                    Persal number is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Component</mat-label>
+                  <input matInput formControlName="component">
+                  <mat-error *ngIf="agreementForm.get('employeeDetails.component')?.hasError('required') && agreementForm.get('employeeDetails.component')?.touched">
+                    Component is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Unit</mat-label>
+                  <input matInput formControlName="unit">
+                  <mat-error *ngIf="agreementForm.get('employeeDetails.unit')?.hasError('required') && agreementForm.get('employeeDetails.unit')?.touched">
+                    Unit is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Job Title</mat-label>
+                  <input matInput formControlName="jobTitle">
+                  <mat-error *ngIf="agreementForm.get('employeeDetails.jobTitle')?.hasError('required') && agreementForm.get('employeeDetails.jobTitle')?.touched">
+                    Job title is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Occupational Classification</mat-label>
+                  <input matInput formControlName="occupationalClassification">
+                  <mat-error *ngIf="agreementForm.get('employeeDetails.occupationalClassification')?.hasError('required') && agreementForm.get('employeeDetails.occupationalClassification')?.touched">
+                    Occupational classification is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h4>4. JOB PURPOSE</h4>
+            <p>(Describe the purpose of the job (overall focus) as it relates to the Vision and Mission of the Department. Capture the overall accountability that the job holder has in relation to the achievement of departmental objectives)</p>
+            <mat-form-field appearance="outline" class="full-width">
+              <textarea matInput rows="4" formControlName="jobPurpose"></textarea>
+              <mat-error *ngIf="agreementForm.get('jobPurpose')?.hasError('required') && agreementForm.get('jobPurpose')?.touched">
+                Job purpose is required
+              </mat-error>
+            </mat-form-field>
+          </section>
+
+          <section>
+            <h4>5. REPORTING REQUIREMENTS/LINES & ASSESSMENT LINES</h4>
+            <div class="numbered-section">
+              <p>5.1 The Employee member shall report to the ___________ (job title in agreement) in her/his capacity on all parts of this agreement. The Employee shall:</p>
+              <ul>
+                <li>Timeously alert the supervisor of any emerging factors that could preclude the achievement of any performance agreement commitments, including the contingency measures that she/he proposes to take to ensure the impact of such deviation from the original agreement is minimized.</li>
+                <li>Establish and maintain appropriate internal controls and reporting systems in order to meet performance expectations.</li>
+                <li>Discuss and thereafter document the process of performance measurement and management with the supervisor.</li>
+              </ul>
+              <p>5.2 In turn the supervisor shall:</p>
+              <ul>
+                <li>Create an enabling environment to facilitate effective performance by the employee.</li>
+                <li>Provide access to skills development and capacity building opportunities.</li>
+                <li>Work collaboratively to solve problems and generate solutions to common problems within the Department that may be impacting on the performance of the Employee.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section>
+            <h4>6. PERFORMANCE ASSESSMENT FRAMEWORK</h4>
+            <p>Performance will be assessed according to the information contained in the WORKPLAN and the Generic Assessment Factors (GAF's) framework.</p>
+            <div class="numbered-section">
+              <p>6.1 The KRAs and GAF's outlined in part 7 of this agreement shall be as set out in the table below.</p>
+              <p>6.2 The Employee member undertakes to focus and to actively work towards the promotion of the Department's vision. The KRAs weight, standards of performance of the laws and regulations governing the Public Service. The specific objectives to be achieved under each of the KRAs are outlined in the attached work plan. The work plan should include all special projects the employee is involved in. The WORKPLAN should outline the Employee's specific responsibilities in such projects.</p>
+            </div>
+
+            <table mat-table class="kra-table">
+              <tr>
+                <th>KRAs</th>
+                <th>Weight</th>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Total</td>
+                <td>100%</td>
+              </tr>
+            </table>
+            <p class="note">NOTE: WEIGHTING OF KRAs MUST TOTAL 100%</p>
+
+            <p>6.3 The Employee's performance will be based on her/his performance in relation to the KRAs and GAFs. Each KRA shall be weighted and shall contribute a corresponding proportion to the final assessment. At least five GAF's, inclusive of any that may become compulsory from time to time, should be selected from the list that are deemed to be critical for the Employee's specific job.</p>
+
+            <table mat-table class="gaf-table">
+              <tr>
+                <th>GAFs</th>
+                <th>Weight</th>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Total</td>
+                <td>100%</td>
+              </tr>
+            </table>
+            <p class="note">NOTE: WEIGHTING OF GAFs MUST TOTAL 100%</p>
+          </section>
+
+          <section>
+            <h4>10. DEVELOPMENTAL REQUIREMENTS</h4>
+            <div class="numbered-section">
+              <p>10.1 The Employer and Employee agree that the following are the Employee's key development needs in relation to her/his current job and envisaged career path in the Public Service. Please forward the completed PMDS PDP to the Skills Development Facilitator (as it would be a requirement for the approval of training).</p>
+              <p>*ONLY ITEMISE DEVELOPMENT AREAS BELOW</p>
+              <mat-form-field appearance="outline" class="full-width">
+                <textarea matInput rows="4" formControlName="developmentRequirements"></textarea>
+                <mat-error *ngIf="agreementForm.get('developmentRequirements')?.hasError('required') && agreementForm.get('developmentRequirements')?.touched">
+                  Development requirements are required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </section>
+
+          <section>
+            <h4>15. SIGNATURES OF PARTIES TO THE AGREEMENT</h4>
+            <p>The contents of this document have been discussed and agreed with the Employee concerned.</p>
+
+            <div class="signatures">
+              <div formGroupName="signatures">
+                <div formGroupName="employee">
+                  <div class="signature-row">
+                    <p>Name of Employee:</p>
+                    <mat-form-field appearance="outline">
+                      <input matInput formControlName="name">
+                      <mat-error *ngIf="agreementForm.get('signatures.employee.name')?.hasError('required') && agreementForm.get('signatures.employee.name')?.touched">
+                        Employee name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="signature-row">
+                    <p>Signature:</p>
+                    <mat-form-field appearance="outline">
+                      <input matInput formControlName="signature">
+                      <mat-error *ngIf="agreementForm.get('signatures.employee.signature')?.hasError('required') && agreementForm.get('signatures.employee.signature')?.touched">
+                        Employee signature is required
+                      </mat-error>
+                    </mat-form-field>
+                    <p>Date:</p>
+                    <mat-form-field appearance="outline">
+                      <input matInput [matDatepicker]="employeeDatePicker" formControlName="date">
+                      <mat-datepicker-toggle matIconSuffix [for]="employeeDatePicker"></mat-datepicker-toggle>
+                      <mat-datepicker #employeeDatePicker></mat-datepicker>
+                      <mat-error *ngIf="agreementForm.get('signatures.employee.date')?.hasError('required') && agreementForm.get('signatures.employee.date')?.touched">
+                        Date is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <p class="and">AND</p>
+
+                <div formGroupName="supervisor">
+                  <div class="signature-row">
+                    <p>Name of supervisor:</p>
+                    <mat-form-field appearance="outline">
+                      <input matInput formControlName="name">
+                      <mat-error *ngIf="agreementForm.get('signatures.supervisor.name')?.hasError('required') && agreementForm.get('signatures.supervisor.name')?.touched">
+                        Supervisor name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="signature-row">
+                    <p>Signature:</p>
+                    <mat-form-field appearance="outline">
+                      <input matInput formControlName="signature">
+                      <mat-error *ngIf="agreementForm.get('signatures.supervisor.signature')?.hasError('required') && agreementForm.get('signatures.supervisor.signature')?.touched">
+                        Supervisor signature is required
+                      </mat-error>
+                    </mat-form-field>
+                    <p>Date:</p>
+                    <mat-form-field appearance="outline">
+                      <input matInput [matDatepicker]="supervisorDatePicker" formControlName="date">
+                      <mat-datepicker-toggle matIconSuffix [for]="supervisorDatePicker"></mat-datepicker-toggle>
+                      <mat-datepicker #supervisorDatePicker></mat-datepicker>
+                      <mat-error *ngIf="agreementForm.get('signatures.supervisor.date')?.hasError('required') && agreementForm.get('signatures.supervisor.date')?.touched">
+                        Date is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit">
+              Save Agreement
+            </button>
+          </div>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

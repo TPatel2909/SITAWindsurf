@@ -1,0 +1,103 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0%;
+  width: 100%;
+}
+
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+/* Custom menu positioning */
+.header-menu {
+  margin-top: 48px !important;
+  
+  .mat-mdc-menu-content {
+    padding: 0 !important;
+  }
+
+  .mat-mdc-menu-item {
+    height: 40px !important;
+    line-height: 40px !important;
+    font-size: 14px !important;
+    padding: 0 16px !important;
+    color: #333 !important;
+    
+    &:hover {
+      background-color: rgba(28, 91, 163, 0.1) !important;
+    }
+
+    .mat-icon {
+      margin-right: 8px !important;
+      color: #1c5ba3 !important;
+    }
+  }
+}
+
+/* Override Material Menu styles */
+.mat-mdc-menu-panel {
+  min-width: 200px !important;
+}
+
+.mat-mdc-menu-content {
+  padding: 0 !important;
+}
+
+.mat-mdc-menu-item {
+  height: 40px !important;
+  line-height: 40px !important;
+  font-size: 14px !important;
+  padding: 0 16px !important;
+  
+  .mat-icon {
+    margin-right: 8px !important;
+  }
+}
+
+/* Position menus relative to buttons */
+.mat-mdc-menu-trigger {
+  position: relative !important;
+}
+
+.mdc-menu-surface {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  margin-top: 2px !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Remove default Material button styles */
+.mat-mdc-button {
+  &:hover {
+    background: none !important;
+  }
+}
+
+/* Ensure proper stacking context */
+.mat-toolbar {
+  position: relative;
+  z-index: 1000;
+}
