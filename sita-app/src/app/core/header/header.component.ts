@@ -30,7 +30,7 @@ export class HeaderComponent {
       route: '/empds',
       subItems: [
         { name: 'Performance Agreement', route: '/empds/performance-agreement' },
-        { name: 'EPMDS Workplan Level 1-12', route: '/empds/workplan-1-12' },
+        { name: 'EPMDS Workplan Level 1-12', route: '/workplan112' },
         { name: 'SMS Workplan Level 13-16', route: '/empds/workplan-13-16' },
         { name: 'Personal Development Plan', route: '/empds/pdp' },
         { name: 'September Review Form', route: '/empds/review' },

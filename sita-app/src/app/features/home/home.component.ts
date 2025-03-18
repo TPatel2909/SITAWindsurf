@@ -24,7 +24,7 @@ interface FeatureCard {
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    HeaderComponent
+    
 ]
 })
 export class HomeComponent {
