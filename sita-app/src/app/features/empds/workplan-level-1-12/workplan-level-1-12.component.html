@@ -14,7 +14,6 @@
             <mat-form-field appearance="outline">
               <mat-label>Name</mat-label>
               <input matInput formControlName="name" required>
-              <mat-icon matPrefix>person</mat-icon>
               <mat-error *ngIf="workplanForm.get('employeeDetails.name')?.hasError('required')">
                 Name is required
               </mat-error>
@@ -23,7 +22,6 @@
             <mat-form-field appearance="outline">
               <mat-label>Job Title</mat-label>
               <input matInput formControlName="jobTitle" required>
-              <mat-icon matPrefix>work</mat-icon>
               <mat-error *ngIf="workplanForm.get('employeeDetails.jobTitle')?.hasError('required')">
                 Job title is required
               </mat-error>
@@ -34,7 +32,6 @@
             <mat-form-field appearance="outline">
               <mat-label>Component</mat-label>
               <input matInput formControlName="component" required>
-              <mat-icon matPrefix>business</mat-icon>
               <mat-error *ngIf="workplanForm.get('employeeDetails.component')?.hasError('required')">
                 Component is required
               </mat-error>
@@ -43,7 +40,6 @@
             <mat-form-field appearance="outline">
               <mat-label>Supervisor</mat-label>
               <input matInput formControlName="supervisor" required>
-              <mat-icon matPrefix>supervisor_account</mat-icon>
               <mat-error *ngIf="workplanForm.get('employeeDetails.supervisor')?.hasError('required')">
                 Supervisor is required
               </mat-error>
@@ -54,7 +50,6 @@
             <mat-form-field appearance="outline">
               <mat-label>Start Date</mat-label>
               <input matInput [matDatepicker]="startPicker" formControlName="startDate" required>
-              <mat-icon matPrefix>event</mat-icon>
               <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
               <mat-datepicker #startPicker></mat-datepicker>
               <mat-error *ngIf="workplanForm.get('employeeDetails.period.startDate')?.hasError('required')">
@@ -65,7 +60,6 @@
             <mat-form-field appearance="outline">
               <mat-label>End Date</mat-label>
               <input matInput [matDatepicker]="endPicker" formControlName="endDate" required>
-              <mat-icon matPrefix>event</mat-icon>
               <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
               <mat-datepicker #endPicker></mat-datepicker>
               <mat-error *ngIf="workplanForm.get('employeeDetails.period.endDate')?.hasError('required')">
@@ -104,7 +98,6 @@
                     <mat-form-field appearance="outline" class="full-width">
                       <mat-label>Description</mat-label>
                       <textarea matInput formControlName="description" rows="3" required></textarea>
-                      <mat-icon matPrefix>description</mat-icon>
                       <mat-error *ngIf="kra.get('description')?.hasError('required')">
                         Description is required
                       </mat-error>
@@ -117,7 +110,6 @@
                       <mat-form-field appearance="outline">
                         <mat-label>Weight (%)</mat-label>
                         <input matInput type="number" formControlName="weight" required>
-                        <mat-icon matPrefix>percent</mat-icon>
                         <mat-error *ngIf="kra.get('weight')?.hasError('required')">
                           Weight is required
                         </mat-error>
@@ -129,7 +121,6 @@
                       <mat-form-field appearance="outline">
                         <mat-label>Target Date</mat-label>
                         <input matInput [matDatepicker]="targetPicker" formControlName="targetDate" required>
-                        <mat-icon matPrefix>event</mat-icon>
                         <mat-datepicker-toggle matSuffix [for]="targetPicker"></mat-datepicker-toggle>
                         <mat-datepicker #targetPicker></mat-datepicker>
                         <mat-error *ngIf="kra.get('targetDate')?.hasError('required')">
@@ -144,7 +135,6 @@
                     <mat-form-field appearance="outline" class="full-width">
                       <mat-label>Key Activities</mat-label>
                       <textarea matInput formControlName="keyActivities" rows="3" required></textarea>
-                      <mat-icon matPrefix>list_alt</mat-icon>
                       <mat-error *ngIf="kra.get('keyActivities')?.hasError('required')">
                         Key activities are required
                       </mat-error>
@@ -156,7 +146,6 @@
                     <mat-form-field appearance="outline" class="full-width">
                       <mat-label>Performance Indicators</mat-label>
                       <textarea matInput formControlName="indicators" rows="3" required></textarea>
-                      <mat-icon matPrefix>analytics</mat-icon>
                       <mat-error *ngIf="kra.get('indicators')?.hasError('required')">
                         Performance indicators are required
                       </mat-error>
@@ -168,7 +157,6 @@
                     <mat-form-field appearance="outline" class="full-width">
                       <mat-label>Evidence Required</mat-label>
                       <textarea matInput formControlName="evidence" rows="2" required></textarea>
-                      <mat-icon matPrefix>fact_check</mat-icon>
                       <mat-error *ngIf="kra.get('evidence')?.hasError('required')">
                         Evidence is required
                       </mat-error>
@@ -180,7 +168,6 @@
                     <mat-form-field appearance="outline" class="full-width">
                       <mat-label>Resources Required</mat-label>
                       <textarea matInput formControlName="resources" rows="2" required></textarea>
-                      <mat-icon matPrefix>inventory</mat-icon>
                       <mat-error *ngIf="kra.get('resources')?.hasError('required')">
                         Resources are required
                       </mat-error>

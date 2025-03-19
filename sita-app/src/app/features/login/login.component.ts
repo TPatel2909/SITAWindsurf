@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,14 +16,13 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    ReactiveFormsModule
   ]
 })
 export class LoginComponent {
@@ -32,31 +30,40 @@ export class LoginComponent {
   hidePassword = true;
   isLoading = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private snackBar: MatSnackBar
-  ) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required]]
     });
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
       this.isLoading = true;
-      // Simulate login - replace with actual authentication
+      
+      // Simulate API call
       setTimeout(() => {
+        // TODO: Replace with actual authentication logic
         this.isLoading = false;
         this.router.navigate(['/home']);
       }, 1500);
+    } else {
+      this.markFormGroupTouched(this.loginForm);
     }
   }
 
   onForgotPassword() {
-    this.snackBar.open('Password reset functionality coming soon!', 'Close', {
-      duration: 3000
+    // TODO: Implement forgot password functionality
+    console.log('Forgot password clicked');
+  }
+
+  private markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      }
     });
   }
 }

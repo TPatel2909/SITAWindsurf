@@ -1,10 +1,10 @@
 <div class="login-container">
   <mat-card class="login-card">
     <mat-card-header>
-      <img src="logoSita.jpg" alt="SITA Logo" class="logo">
-      <mat-card-title>Welcome to SITA</mat-card-title>
-      
-      
+      <div class="logo-container">
+        <img src="logoSita.jpg" alt="SITA Logo" class="logo">
+        <mat-card-title>Welcome to SITA</mat-card-title>
+      </div>
     </mat-card-header>
 
     <mat-card-content>
@@ -12,7 +12,6 @@
         <mat-form-field appearance="outline">
           <mat-label>Username</mat-label>
           <input matInput formControlName="username" required>
-          <mat-icon matPrefix>person</mat-icon>
           <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
             Username is required
           </mat-error>
@@ -22,26 +21,23 @@
           <mat-label>Password</mat-label>
           <input matInput [type]="hidePassword ? 'password' : 'text'" 
                  formControlName="password" required>
-          <mat-icon matPrefix>lock</mat-icon>
-          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+          <button mat-icon-button matSuffix type="button"
+                  (click)="hidePassword = !hidePassword">
             <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
           <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
             Password is required
           </mat-error>
-          <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
-            Password must be at least 6 characters
-          </mat-error>
         </mat-form-field>
 
         <div class="actions">
-          <button mat-raised-button type="submit" 
+          <button mat-raised-button color="primary" type="submit" 
                   class="login-btn" 
                   [disabled]="loginForm.invalid || isLoading">
             <span *ngIf="!isLoading">Login</span>
             <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
           </button>
-          <button mat-button type="button" (click)="onForgotPassword()" class="forgot-password">
+          <button mat-button type="button" class="forgot-password" (click)="onForgotPassword()">
             Forgot Password?
           </button>
         </div>
