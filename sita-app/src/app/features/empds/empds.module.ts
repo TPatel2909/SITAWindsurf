@@ -9,16 +9,21 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 
 import { empdsRoutes } from './empds-routing.module';
 import { PerformanceAgreementComponent } from './performance-agreement/performance-agreement.component';
+import { WorkplanLevel112Component } from './workplan-level-1-12/workplan-level-1-12.component';
+import { WorkplanLevel1316Component } from './workplan-level-13-16/workplan-level-13-16.component';
 
 @NgModule({
-  declarations: [],
   imports: [
+    // Angular modules
     CommonModule,
     RouterModule.forChild(empdsRoutes),
     ReactiveFormsModule,
+    
+    // Material modules
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -26,7 +31,12 @@ import { PerformanceAgreementComponent } from './performance-agreement/performan
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    PerformanceAgreementComponent
+    MatIconModule,
+    
+    // Standalone components
+    PerformanceAgreementComponent,
+    WorkplanLevel112Component,
+    WorkplanLevel1316Component
   ]
 })
 export class EmpdsModule { }

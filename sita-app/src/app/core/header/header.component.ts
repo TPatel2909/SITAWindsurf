@@ -5,12 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
-
-interface NavItem {
-  name: string;
-  route: string;
-  subItems?: NavItem[];
-}
+import { NavigationService, NavItem } from '../services/navigation.service';
 
 @Component({
   selector: 'app-header',
@@ -30,7 +25,7 @@ export class HeaderComponent {
       route: '/empds',
       subItems: [
         { name: 'Performance Agreement', route: '/empds/performance-agreement' },
-        { name: 'EPMDS Workplan Level 1-12', route: '/workplan112' },
+        { name: 'EPMDS Workplan Level 1-12', route: '/empds/workplan-1-12' },
         { name: 'SMS Workplan Level 13-16', route: '/empds/workplan-13-16' },
         { name: 'Personal Development Plan', route: '/empds/pdp' },
         { name: 'September Review Form', route: '/empds/review' },
@@ -67,6 +62,8 @@ export class HeaderComponent {
     }
   ];
 
+  constructor(private navigationService: NavigationService) {}
+
   toggleSidebar(): void {
     this.sidebarToggled.emit();
   }
@@ -74,6 +71,9 @@ export class HeaderComponent {
   onNavItemClick(item: NavItem): void {
     this.activeItem = item.name;
     this.navItemSelected.emit(item);
+    if (item.subItems) {
+      this.navigationService.updateFeature(item.name, item.subItems);
+    }
   }
 
   getNavIcon(name: string): string {

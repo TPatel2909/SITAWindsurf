@@ -4,15 +4,17 @@
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #sidenav mode="side" [opened]="isSidebarOpen && !isLoginPage">
       <nav class="nav-section">
+        <div class="feature-header" *ngIf="currentFeature">
+          <mat-icon>{{getFeatureIcon(currentFeature)}}</mat-icon>
+          <h2>{{currentFeature}}</h2>
+        </div>
         <mat-nav-list>
-          <a mat-list-item routerLink="/home" routerLinkActive="active">
-            <mat-icon>home</mat-icon>
-            <span class="nav-item-text">Home</span>
-          </a>
-          <a mat-list-item routerLink="/empds" routerLinkActive="active">
-            <mat-icon>group</mat-icon>
-            <span class="nav-item-text">EMPDS</span>
-          </a>
+          <ng-container *ngFor="let item of currentNavItems; trackBy: trackItem">
+            <a mat-list-item [routerLink]="item.route" routerLinkActive="active">
+              <mat-icon>chevron_right</mat-icon>
+              <span class="nav-item-text">{{item.name}}</span>
+            </a>
+          </ng-container>
         </mat-nav-list>
       </nav>
     </mat-sidenav>

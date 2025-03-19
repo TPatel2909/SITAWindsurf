@@ -1,0 +1,237 @@
+<div class="workplan-container">
+  <mat-card class="workplan-card">
+    <mat-card-header>
+      <mat-card-title>SMS WORKPLAN LEVEL 13-16</mat-card-title>
+      <mat-card-subtitle>Key Result Areas (KRAs) and Strategic Objectives</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="workplanForm" (ngSubmit)="onSubmit()">
+        <!-- Employee Details Section -->
+        <section class="employee-details" formGroupName="employeeDetails">
+          <h3>Employee Details</h3>
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" required>
+              <mat-error *ngIf="workplanForm.get('employeeDetails.name')?.hasError('required')">
+                Name is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Job Title</mat-label>
+              <input matInput formControlName="jobTitle" required>
+              <mat-error *ngIf="workplanForm.get('employeeDetails.jobTitle')?.hasError('required')">
+                Job title is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Component</mat-label>
+              <input matInput formControlName="component" required>
+              <mat-error *ngIf="workplanForm.get('employeeDetails.component')?.hasError('required')">
+                Component is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Supervisor</mat-label>
+              <input matInput formControlName="supervisor" required>
+              <mat-error *ngIf="workplanForm.get('employeeDetails.supervisor')?.hasError('required')">
+                Supervisor is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>SMS Level</mat-label>
+              <mat-select formControlName="smsLevel" required>
+                <mat-option [value]="13">Level 13</mat-option>
+                <mat-option [value]="14">Level 14</mat-option>
+                <mat-option [value]="15">Level 15</mat-option>
+                <mat-option [value]="16">Level 16</mat-option>
+              </mat-select>
+              <mat-error *ngIf="workplanForm.get('employeeDetails.smsLevel')?.hasError('required')">
+                SMS Level is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row" formGroupName="period">
+            <mat-form-field appearance="outline">
+              <mat-label>Start Date</mat-label>
+              <input matInput [matDatepicker]="startPicker" formControlName="startDate" required>
+              <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+              <mat-datepicker #startPicker></mat-datepicker>
+              <mat-error *ngIf="workplanForm.get('employeeDetails.period.startDate')?.hasError('required')">
+                Start date is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>End Date</mat-label>
+              <input matInput [matDatepicker]="endPicker" formControlName="endDate" required>
+              <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+              <mat-datepicker #endPicker></mat-datepicker>
+              <mat-error *ngIf="workplanForm.get('employeeDetails.period.endDate')?.hasError('required')">
+                End date is required
+              </mat-error>
+              <mat-error *ngIf="workplanForm.get('employeeDetails.period.endDate')?.hasError('endDateInvalid')">
+                End date must be after start date
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </section>
+
+        <!-- KRAs Section -->
+        <section class="kras-section">
+          <div class="section-header">
+            <h3>Key Result Areas (KRAs)</h3>
+            <button mat-raised-button color="primary" type="button" (click)="addKRA()" 
+                    [disabled]="kras.length >= 8">
+              <mat-icon>add</mat-icon>
+              Add KRA
+            </button>
+          </div>
+
+          <div class="kras-container" formArrayName="kras">
+            <ng-container *ngFor="let kra of kras.controls; let i = index">
+              <mat-card class="kra-card" [formGroupName]="i">
+                <mat-card-header>
+                  <mat-card-title>KRA #{{i + 1}}</mat-card-title>
+                  <button *ngIf="i > 0" mat-icon-button color="warn" type="button" (click)="removeKRA(i)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </mat-card-header>
+
+                <mat-card-content>
+                  <div class="kra-form">
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Description</mat-label>
+                      <textarea matInput formControlName="description" rows="3" required></textarea>
+                      <mat-error *ngIf="kra.get('description')?.hasError('required')">
+                        Description is required
+                      </mat-error>
+                      <mat-error *ngIf="kra.get('description')?.hasError('minlength')">
+                        Description must be at least 10 characters
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Strategic Objective</mat-label>
+                      <textarea matInput formControlName="strategicObjective" rows="3" required></textarea>
+                      <mat-error *ngIf="kra.get('strategicObjective')?.hasError('required')">
+                        Strategic objective is required
+                      </mat-error>
+                      <mat-error *ngIf="kra.get('strategicObjective')?.hasError('minlength')">
+                        Strategic objective must be at least 10 characters
+                      </mat-error>
+                    </mat-form-field>
+
+                    <div class="form-row">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Weight (%)</mat-label>
+                        <input matInput type="number" formControlName="weight" required>
+                        <mat-error *ngIf="kra.get('weight')?.hasError('required')">
+                          Weight is required
+                        </mat-error>
+                        <mat-error *ngIf="kra.get('weight')?.hasError('min') || kra.get('weight')?.hasError('max')">
+                          Weight must be between 0 and 100
+                        </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline">
+                        <mat-label>Target Date</mat-label>
+                        <input matInput [matDatepicker]="targetPicker" formControlName="targetDate" required>
+                        <mat-datepicker-toggle matSuffix [for]="targetPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #targetPicker></mat-datepicker>
+                        <mat-error *ngIf="kra.get('targetDate')?.hasError('required')">
+                          Target date is required
+                        </mat-error>
+                        <mat-error *ngIf="kra.get('targetDate')?.hasError('targetDateOutOfRange')">
+                          Target date must be within the workplan period
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Key Activities</mat-label>
+                      <textarea matInput formControlName="keyActivities" rows="3" required></textarea>
+                      <mat-error *ngIf="kra.get('keyActivities')?.hasError('required')">
+                        Key activities are required
+                      </mat-error>
+                      <mat-error *ngIf="kra.get('keyActivities')?.hasError('minlength')">
+                        Key activities must be at least 10 characters
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Performance Indicators</mat-label>
+                      <textarea matInput formControlName="indicators" rows="3" required></textarea>
+                      <mat-error *ngIf="kra.get('indicators')?.hasError('required')">
+                        Performance indicators are required
+                      </mat-error>
+                      <mat-error *ngIf="kra.get('indicators')?.hasError('minlength')">
+                        Performance indicators must be at least 10 characters
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Evidence Required</mat-label>
+                      <textarea matInput formControlName="evidence" rows="2" required></textarea>
+                      <mat-error *ngIf="kra.get('evidence')?.hasError('required')">
+                        Evidence is required
+                      </mat-error>
+                      <mat-error *ngIf="kra.get('evidence')?.hasError('minlength')">
+                        Evidence must be at least 5 characters
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Resources Required</mat-label>
+                      <textarea matInput formControlName="resources" rows="2" required></textarea>
+                      <mat-error *ngIf="kra.get('resources')?.hasError('required')">
+                        Resources are required
+                      </mat-error>
+                      <mat-error *ngIf="kra.get('resources')?.hasError('minlength')">
+                        Resources must be at least 5 characters
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Development Needs</mat-label>
+                      <textarea matInput formControlName="developmentNeeds" rows="2"></textarea>
+                      <mat-error *ngIf="kra.get('developmentNeeds')?.hasError('minlength')">
+                        Development needs must be at least 5 characters
+                      </mat-error>
+                      <mat-hint>Optional: Specify any development needs related to this KRA</mat-hint>
+                    </mat-form-field>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </ng-container>
+          </div>
+
+          <div class="weight-summary" [class.weight-error]="getTotalWeight() !== 100">
+            <p>
+              Total Weight: {{getTotalWeight()}}% 
+              <span *ngIf="getTotalWeight() !== 100" class="error-message">(Must equal 100%)</span>
+            </p>
+          </div>
+        </section>
+
+        <div class="form-actions">
+          <button mat-button type="button" routerLink="/empds">Cancel</button>
+          <button mat-raised-button color="primary" type="submit" 
+                  [disabled]="workplanForm.invalid || getTotalWeight() !== 100">
+            Save Workplan
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
