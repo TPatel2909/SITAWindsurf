@@ -1,0 +1,158 @@
+<div class="workplan-container">
+  <mat-card class="workplan-card">
+    <mat-card-header>
+      <mat-card-title>EPMDS PERSONAL DEVELOPMENT PLAN</mat-card-title>
+      <mat-card-subtitle>Professional Growth and Development Planning</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="pdpForm" (ngSubmit)="onSubmit()">
+        <!-- Employee Details Section -->
+        <section class="employee-details" formGroupName="employeeInfo">
+          <h3>Employee Details</h3>
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" required>
+              <mat-error *ngIf="pdpForm.get('employeeInfo.name')?.hasError('required')">
+                Name is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Employee Number</mat-label>
+              <input matInput formControlName="employeeNumber" required>
+              <mat-error *ngIf="pdpForm.get('employeeInfo.employeeNumber')?.hasError('required')">
+                Employee number is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Job Title</mat-label>
+              <input matInput formControlName="jobTitle" required>
+              <mat-error *ngIf="pdpForm.get('employeeInfo.jobTitle')?.hasError('required')">
+                Job title is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Department</mat-label>
+              <input matInput formControlName="department" required>
+              <mat-error *ngIf="pdpForm.get('employeeInfo.department')?.hasError('required')">
+                Department is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Supervisor</mat-label>
+              <input matInput formControlName="supervisor" required>
+              <mat-error *ngIf="pdpForm.get('employeeInfo.supervisor')?.hasError('required')">
+                Supervisor is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Period</mat-label>
+              <input matInput formControlName="period" required placeholder="e.g., 2025/2026">
+              <mat-error *ngIf="pdpForm.get('employeeInfo.period')?.hasError('required')">
+                Period is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </section>
+
+        <!-- Development Needs Section -->
+        <section class="development-needs-section">
+          <div class="section-header">
+            <h3>Development Needs</h3>
+            <button mat-raised-button color="primary" type="button" (click)="addDevelopmentNeed()">
+              <mat-icon>add</mat-icon>
+              Add Development Need
+            </button>
+          </div>
+
+          <div class="needs-container" formArrayName="developmentNeeds">
+            <ng-container *ngFor="let need of developmentNeeds.controls; let i = index">
+              <mat-card class="need-card" [formGroupName]="i">
+                <mat-card-header>
+                  <mat-card-title>Development Need #{{i + 1}}</mat-card-title>
+                  <button *ngIf="i > 0" mat-icon-button color="warn" type="button" (click)="removeDevelopmentNeed(i)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </mat-card-header>
+
+                <mat-card-content>
+                  <div class="need-form">
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Competency Area</mat-label>
+                      <input matInput formControlName="competencyArea" required>
+                      <mat-error *ngIf="need.get('competencyArea')?.hasError('required')">
+                        Competency area is required
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Development Required</mat-label>
+                      <textarea matInput formControlName="developmentRequired" rows="3" required></textarea>
+                      <mat-error *ngIf="need.get('developmentRequired')?.hasError('required')">
+                        Development required description is required
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Proposed Actions</mat-label>
+                      <textarea matInput formControlName="proposedActions" rows="3" required></textarea>
+                      <mat-error *ngIf="need.get('proposedActions')?.hasError('required')">
+                        Proposed actions are required
+                      </mat-error>
+                    </mat-form-field>
+
+                    <div class="timeline-row">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Timeframe</mat-label>
+                        <input matInput formControlName="timeframe" required placeholder="e.g., Q2 2025">
+                        <mat-error *ngIf="need.get('timeframe')?.hasError('required')">
+                          Timeframe is required
+                        </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline">
+                        <mat-label>Priority (1-5)</mat-label>
+                        <input matInput type="number" formControlName="priority" min="1" max="5" required>
+                        <mat-error *ngIf="need.get('priority')?.hasError('required')">
+                          Priority is required
+                        </mat-error>
+                        <mat-error *ngIf="need.get('priority')?.hasError('min') || need.get('priority')?.hasError('max')">
+                          Priority must be between 1 and 5
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Support/Resources Needed</mat-label>
+                      <textarea matInput formControlName="supportNeeded" rows="3" required></textarea>
+                      <mat-error *ngIf="need.get('supportNeeded')?.hasError('required')">
+                        Support/resources needed is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </ng-container>
+          </div>
+        </section>
+
+        <div class="form-actions">
+          <button mat-button type="button">Cancel</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!pdpForm.valid">
+            Save Personal Development Plan
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

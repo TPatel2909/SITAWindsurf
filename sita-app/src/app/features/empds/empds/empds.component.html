@@ -1,0 +1,7 @@
+<div class="empds-container">
+  <div class="empds-content">
+    <ng-container *ngIf="currentRoute$ | async as route">
+      <router-outlet></router-outlet>
+    </ng-container>
+  </div>
+</div>
